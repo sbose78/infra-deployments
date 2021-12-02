@@ -80,7 +80,7 @@ spec:
         - name: SCRIPT 
           value: |
             #!/usr/bin/env bash  
-            echo "Noop Test, this step will wait for parallel tasks to be"    
+            echo "Noop Test, this step will wait for parallel tasks to be done"    
 
             oc annotate pipelinerun $(context.pipelineRun.name) build.appstudio.io/repo=none
             oc annotate pipelinerun $(context.pipelineRun.name) build.appstudio.io/image=none
