@@ -26,8 +26,7 @@ spec:
             #!/usr/bin/env bash 
             echo "Simple Pipeline "  
             echo "GIT URL: $(params.git-url)" 
-            echo "Image URL: $(params.output-image)" 
-            echo " John was here"
+            echo "Image URL: $(params.output-image)"  
       workspaces:
         - name: manifest-dir 
           workspace: workspace
