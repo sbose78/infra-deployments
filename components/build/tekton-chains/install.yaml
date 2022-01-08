@@ -27,13 +27,10 @@ metadata:
 
 # The data can be tweaked at install time, it is commented out
 # because these are the default settings.
-# data:
-#   artifacts.taskrun.format: tekton
-#   artifacts.taskrun.storage: tekton
-#   artifacts.taskrun.signer: x509
-#   artifacts.oci.storage: oci
-#   artifacts.oci.format: simplesigning
-#   artifacts.oci.signer: x509
+data:
+   artifacts.taskrun.format: in-toto
+   artifacts.oci.storage: oci
+   transparency.enabled: "true"
 ---
 apiVersion: apps/v1
 kind: Deployment
