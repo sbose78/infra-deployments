@@ -28,7 +28,7 @@ metadata:
 # The data can be tweaked at install time, it is commented out
 # because these are the default settings.
 data:
-   artifacts.taskrun.format: in-toto
+   artifacts.taskrun.format: tekton-provenance
    artifacts.oci.storage: oci
    transparency.enabled: "true"
 ---
