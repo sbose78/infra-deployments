@@ -28,9 +28,9 @@ metadata:
 # The data can be tweaked at install time, it is commented out
 # because these are the default settings.
 data:
-   artifacts.taskrun.format: tekton-provenance
-   artifacts.oci.storage: oci
-   transparency.enabled: "true"
+  "artifacts.taskrun.format": "tekton-provenance"
+  "artifacts.taskrun.storage": "oci"
+  "transparency.enabled": "true"
 ---
 apiVersion: apps/v1
 kind: Deployment
