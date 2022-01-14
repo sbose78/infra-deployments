@@ -28,7 +28,7 @@ metadata:
 # The data can be tweaked at install time, it is commented out
 # because these are the default settings.
 data:
-  "artifacts.taskrun.format": "tekton-provenance"
+  "artifacts.taskrun.format": "in-toto"
   "artifacts.taskrun.storage": "oci"
   "transparency.enabled": "true"
 ---
@@ -60,6 +60,8 @@ spec:
         version: "v0.6.1"
     spec:
       serviceAccountName: tekton-chains-controller
+      securityContext:
+        runAsUser: 0
       containers:
         - name: tekton-chains-controller
           image: gcr.io/tekton-releases/github.com/tektoncd/chains/cmd/controller:v0.6.1@sha256:8faf79b4bf92078feb4b3b5229eeccc19a32512f847abc95c109d37842cb51f3
@@ -201,6 +203,35 @@ rules:
   - apiGroups: ["coordination.k8s.io"]
     resources: ["leases"]
     verbs: ["get", "list", "create", "update", "delete", "patch", "watch"]
+---
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: chains-scc
+  namespace: tekton-chains
+rules:
+  - verbs:
+      - use
+    apiGroups:
+      - security.openshift.io
+    resources:
+      - securitycontextconstraints
+    resourceNames:
+      - anyuid
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: chains-scc
+  namespace: tekton-chains
+subjects:
+  - kind: ServiceAccount
+    name: tekton-chains-controller
+    namespace: tekton-chains
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: chains-scc
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
